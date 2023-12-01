@@ -3,7 +3,7 @@ import 'un_favorite_book_usecase_interface.dart';
 
 class UnFavoriteBookUseCaseImpl implements IUnFavoriteBookUsecase {
   final IBookRepository _bookRepository;
-  UnFavoriteBookUseCaseImpl(IBookRepository bookRepository)
+  UnFavoriteBookUseCaseImpl({required IBookRepository bookRepository})
       : _bookRepository = bookRepository;
   @override
   Future<void> call({required int idBook}) async {

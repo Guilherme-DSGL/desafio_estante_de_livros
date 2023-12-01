@@ -4,7 +4,7 @@ import 'favorite_book_usecase_interface.dart';
 
 class FavoriteBookUseCaseImpl implements IFavoriteBookUsecase {
   final IBookRepository _bookRepository;
-  FavoriteBookUseCaseImpl(IBookRepository bookRepository)
+  FavoriteBookUseCaseImpl({required IBookRepository bookRepository})
       : _bookRepository = bookRepository;
   @override
   Future<void> call({required int idBook}) async {

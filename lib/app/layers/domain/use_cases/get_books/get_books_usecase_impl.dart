@@ -4,7 +4,7 @@ import 'get_books_usecase_interface.dart';
 
 class GetBooksUseCaseImpl implements IGetBooksUsecase {
   final IBookRepository _bookRepository;
-  GetBooksUseCaseImpl(IBookRepository bookRepository)
+  GetBooksUseCaseImpl({required IBookRepository bookRepository})
       : _bookRepository = bookRepository;
   @override
   Future<List<BookEntity>> call() async {
