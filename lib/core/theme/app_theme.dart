@@ -10,7 +10,7 @@ abstract class AppTheme {
     textTheme: AppTextTheme.primaryTheme,
     brightness: Brightness.light,
     canvasColor: AppColors.primaryColor,
-    colorScheme: ColorScheme.light(
+    colorScheme: const ColorScheme.light(
       primary: AppColors.primaryColor,
     ),
   );
