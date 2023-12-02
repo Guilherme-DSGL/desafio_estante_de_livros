@@ -26,12 +26,21 @@ dependencies:
   intl: ^0.18.0
   asuka: ^2.0.2
   vocsy_epub_viewer: ^2.0.0
+  sqflite: ^2.3.0
+  path: ^1.8.3
+  http: ^1.1.2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
+  #General
   flutter_lints: ^2.0.0
+  sqflite_common_ffi: ^2.3.0+4
+
+  #Tests
+  mockito: ^5.4.3
+  build_runner: ^2.4.7
 
 flutter:
 
