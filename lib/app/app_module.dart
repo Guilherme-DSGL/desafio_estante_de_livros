@@ -4,10 +4,7 @@ import 'layers/presentation/modules/home/home_module.dart';
 
 class AppModule extends Module {
   @override
-  List<Module> get imports => [HomeModule()];
-
-  @override
   final List<ModularRoute> routes = [
-    ModuleRoute('/', module: HomeModule()),
+    ModuleRoute(Modular.initialRoute, module: HomeModule()),
   ];
 }

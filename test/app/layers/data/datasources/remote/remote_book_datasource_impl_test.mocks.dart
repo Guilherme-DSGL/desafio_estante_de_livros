@@ -33,10 +33,11 @@ class _FakeResponse_0 extends _i1.SmartFake implements _i2.Response {
         );
 }
 
-/// A class which mocks [HttpClientAdapter].
+/// A class which mocks [HttpClientAdapterImpl].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockHttpClientAdapter extends _i1.Mock implements _i3.HttpClientAdapter {
+class MockHttpClientAdapterImpl extends _i1.Mock
+    implements _i3.HttpClientAdapterImpl {
   @override
   _i4.Future<_i2.Response> get(
     String? path, {

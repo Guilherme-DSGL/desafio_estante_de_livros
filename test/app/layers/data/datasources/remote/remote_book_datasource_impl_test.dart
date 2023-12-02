@@ -12,17 +12,17 @@ import 'package:mockito/mockito.dart';
 import 'remote_book_datasource_impl_test.mocks.dart';
 
 @GenerateNiceMocks([
-  MockSpec<HttpClientAdapter>(),
+  MockSpec<HttpClientAdapterImpl>(),
 ])
 void main() {
   group("Remote Data Source", () {
     late List<Map<String, dynamic>> response;
     late IRemoteBookDataSource remoteBookDataSource;
-    late MockHttpClientAdapter mockHttpClientAdapter;
+    late MockHttpClientAdapterImpl mockHttpClientAdapter;
     setUpAll(() {
-      mockHttpClientAdapter = MockHttpClientAdapter();
+      mockHttpClientAdapter = MockHttpClientAdapterImpl();
       remoteBookDataSource =
-          RemoteBookDataSource(httpClientAdapter: mockHttpClientAdapter);
+          RemoteBookDataSourceImpl(httpClientAdapter: mockHttpClientAdapter);
       response = [
         {
           "id": 1,

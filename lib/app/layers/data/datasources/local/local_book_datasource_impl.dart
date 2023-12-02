@@ -1,9 +1,9 @@
-import 'package:desafio_estante_de_livros/app/layers/data/dtos/book_dto.dart';
-import 'package:desafio_estante_de_livros/core/infrastructure/local_db/services/book_service.dart';
 import 'package:sqflite/sqflite.dart';
 
 import '../../../../../core/infrastructure/local_db/local_db_interface.dart';
+import '../../../../../core/infrastructure/local_db/services/book_service.dart';
 import '../../../domain/entities/book_entity.dart';
+import '../../dtos/book_dto.dart';
 import '../remote_book_datasource_interfaces.dart';
 
 class LocalBookDataSource implements ILocalBookDataSource {

@@ -6,7 +6,7 @@ import 'local_db_interface.dart';
 class LocalDBProviderImpl implements ILocalDBProvider<Database> {
   LocalDBProviderImpl._();
 
-  static ILocalDBProvider get instance => LocalDBProviderImpl._();
+  static ILocalDBProvider<Database> get instance => LocalDBProviderImpl._();
 
   Database? _database;
 

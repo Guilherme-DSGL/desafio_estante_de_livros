@@ -1,8 +1,9 @@
 import 'dart:developer';
 
+import 'package:sqflite/sqflite.dart';
+
 import '../../../../app/layers/data/dtos/book_dto.dart';
 import '../../../errors/exceptions.dart';
-import 'package:sqflite/sqflite.dart';
 
 class BookService {
   BookService._();
