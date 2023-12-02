@@ -7,6 +7,9 @@ class HomeState extends Equatable {
   final List<BookEntity> books;
   final String? errorMessage;
 
+  List<BookEntity> get favoritesBooks =>
+      books.where((element) => element.isFavorite).toList();
+
   const HomeState._({
     required this.status,
     required this.books,
@@ -20,7 +23,7 @@ class HomeState extends Equatable {
         );
 
   @override
-  List<Object?> get props => [status, errorMessage];
+  List<Object?> get props => [status, errorMessage, books, favoritesBooks];
 
   HomeState copyWith({
     HomeStatus? status,

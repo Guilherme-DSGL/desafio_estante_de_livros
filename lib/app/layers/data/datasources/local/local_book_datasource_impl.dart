@@ -13,11 +13,13 @@ class LocalBookDataSource implements ILocalBookDataSource {
   }) : _localDBProvider = localDBProvider;
 
   @override
-  Future<void> favoriteBook({required BookEntity bookEntity}) async {
+  Future<BookEntity> favoriteBook({required BookEntity bookEntity}) async {
+    final book = BookDTO.fromEntity(bookEntity).copyWith(isFavorite: true);
     await BookService.insertBook(
-      bookDTO: BookDTO.fromEntity(bookEntity),
+      bookDTO: book,
       database: await _localDBProvider.database,
     );
+    return book;
   }
 
   @override
@@ -28,9 +30,10 @@ class LocalBookDataSource implements ILocalBookDataSource {
   }
 
   @override
-  Future<void> unfavoriteBook({required BookEntity bookEntity}) async {
-    await BookService.insertBook(
-        bookDTO: BookDTO.fromEntity(bookEntity),
-        database: await _localDBProvider.database);
+  Future<BookEntity> unfavoriteBook({required BookEntity bookEntity}) async {
+    final book = BookDTO.fromEntity(bookEntity).copyWith(isFavorite: false);
+    await BookService.deleteBook(
+        bookId: bookEntity.id, database: await _localDBProvider.database);
+    return book;
   }
 }

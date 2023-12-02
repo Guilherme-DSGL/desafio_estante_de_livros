@@ -1,8 +1,8 @@
 import '../../domain/entities/book_entity.dart';
 
 abstract interface class ILocalBookDataSource {
-  Future<void> favoriteBook({required BookEntity bookEntity});
-  Future<void> unfavoriteBook({required BookEntity bookEntity});
+  Future<BookEntity> favoriteBook({required BookEntity bookEntity});
+  Future<BookEntity> unfavoriteBook({required BookEntity bookEntity});
   Future<List<BookEntity>> getBooksFavorite();
 }
 

@@ -7,7 +7,7 @@ class FavoriteBookUseCaseImpl implements IFavoriteBookUsecase {
   FavoriteBookUseCaseImpl({required IBookRepository bookRepository})
       : _bookRepository = bookRepository;
   @override
-  Future<void> call({required BookEntity bookEntity}) async {
+  Future<BookEntity> call({required BookEntity bookEntity}) async {
     return await _bookRepository.favoriteBook(bookEntity: bookEntity);
   }
 }

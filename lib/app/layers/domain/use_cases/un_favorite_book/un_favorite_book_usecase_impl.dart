@@ -7,7 +7,7 @@ class UnFavoriteBookUseCaseImpl implements IUnFavoriteBookUsecase {
   UnFavoriteBookUseCaseImpl({required IBookRepository bookRepository})
       : _bookRepository = bookRepository;
   @override
-  Future<void> call({required BookEntity bookEntity}) async {
+  Future<BookEntity> call({required BookEntity bookEntity}) async {
     return await _bookRepository.unFavoriteBook(bookEntity: bookEntity);
   }
 }

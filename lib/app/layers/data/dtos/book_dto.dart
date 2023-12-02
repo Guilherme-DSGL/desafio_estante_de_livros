@@ -71,4 +71,21 @@ class BookDTO extends BookEntity {
 
   factory BookDTO.fromJson(String source) =>
       BookDTO.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  BookDTO copyWith(
+      {int? id,
+      String? title,
+      String? author,
+      String? coverUrl,
+      String? downloadUrl,
+      bool? isFavorite}) {
+    return BookDTO(
+      id: id ?? this.id,
+      title: title ?? this.title,
+      author: author ?? this.author,
+      coverUrl: coverUrl ?? this.coverUrl,
+      downloadUrl: downloadUrl ?? this.downloadUrl,
+      isFavorite: isFavorite ?? this.isFavorite,
+    );
+  }
 }

@@ -3,17 +3,15 @@ import 'package:flutter/material.dart';
 import 'home_grid_view.dart';
 
 class FavoritesTabView extends StatelessWidget {
-  const FavoritesTabView({super.key});
-
+  const FavoritesTabView(
+      {super.key, required this.itemBuilder, required this.itemCount});
+  final Widget Function(BuildContext, int) itemBuilder;
+  final int itemCount;
   @override
   Widget build(BuildContext context) {
     return HomeGridView(
-      itemCount: 10,
-      itemBuilder: (context, index) => Container(
-        height: 200,
-        width: 200,
-        color: Colors.black,
-      ),
+      itemCount: itemCount,
+      itemBuilder: itemBuilder,
     );
   }
 }

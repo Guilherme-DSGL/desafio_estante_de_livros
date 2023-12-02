@@ -13,12 +13,12 @@ class BookRepositoryImpl implements IBookRepository {
         _localBookRepository = localBookDataSource;
 
   @override
-  Future<void> favoriteBook({required BookEntity bookEntity}) {
+  Future<BookEntity> favoriteBook({required BookEntity bookEntity}) {
     return _localBookRepository.favoriteBook(bookEntity: bookEntity);
   }
 
   @override
-  Future<void> unFavoriteBook({required BookEntity bookEntity}) {
+  Future<BookEntity> unFavoriteBook({required BookEntity bookEntity}) {
     return _localBookRepository.unfavoriteBook(bookEntity: bookEntity);
   }
 

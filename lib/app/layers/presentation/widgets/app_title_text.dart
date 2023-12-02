@@ -12,7 +12,7 @@ class AppTitleText extends StatelessWidget {
     return Text(
       title,
       softWrap: true,
-      overflow: TextOverflow.fade,
+      overflow: TextOverflow.ellipsis,
       maxLines: 2,
       style: AppTextTheme.primaryTheme.displaySmall!
           .merge(textStyle)

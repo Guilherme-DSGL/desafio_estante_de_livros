@@ -1,30 +1,31 @@
 import 'dart:convert';
 import 'dart:developer';
 
-import 'package:desafio_estante_de_livros/app/layers/data/dtos/book_dto.dart';
-import 'package:desafio_estante_de_livros/app/layers/domain/entities/book_entity.dart';
-import 'package:desafio_estante_de_livros/core/errors/exceptions.dart';
-import 'package:desafio_estante_de_livros/core/infrastructure/network/app_api.dart';
-import 'package:desafio_estante_de_livros/core/infrastructure/network/http_client/http_client_adapter_interface.dart';
 import 'package:http/http.dart';
 
+import '../../../../../core/errors/exceptions.dart';
+import '../../../../../core/fixture/response.dart';
+import '../../../../../core/infrastructure/network/http_client/http_client_adapter_interface.dart';
+import '../../../domain/entities/book_entity.dart';
+import '../../dtos/book_dto.dart';
 import '../remote_book_datasource_interfaces.dart';
 
-class RemoteBookDataSource implements IRemoteBookDataSource {
+class RemoteBookDataSourceImpl implements IRemoteBookDataSource {
   final IHttpClientAdapter<Response> _httpClientAdapter;
 
-  RemoteBookDataSource(
+  RemoteBookDataSourceImpl(
       {required IHttpClientAdapter<Response> httpClientAdapter})
       : _httpClientAdapter = httpClientAdapter;
   @override
   Future<List<BookEntity>> getBooks() async {
-    final result = await _httpClientAdapter
-        .get(AppApi.getBooksURl, headers: {'Content-Type': 'application/json'});
-    if (result.statusCode == 200) {
-      return _parseBody(result.body);
-    } else {
+    await Future.delayed(const Duration(seconds: 2));
+    /* final result = await _httpClientAdapter
+        .get(AppApi.getBooksURl, headers: {'Content-Type': 'application/json'}); */
+    /* if (result.statusCode == 200) { */
+    return _parseBody(jsonEncode(MockResponse.mockResponse));
+    /* } else {
       throw ServerException();
-    }
+    } */
   }
 
   List<BookEntity> _parseBody(String body) {

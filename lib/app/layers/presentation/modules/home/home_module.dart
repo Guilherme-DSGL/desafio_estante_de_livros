@@ -1,7 +1,7 @@
-import 'package:desafio_estante_de_livros/app/layers/data/datasources/remote/remote_book_datasource_impl.dart';
-import 'package:desafio_estante_de_livros/app/layers/presentation/modules/home/controllers/home_controller.dart';
-import 'package:desafio_estante_de_livros/core/infrastructure/network/http_client/http_client_adapter_impl.dart';
-import 'package:desafio_estante_de_livros/core/infrastructure/network/http_client/http_client_adapter_interface.dart';
+import '../../../data/datasources/remote/remote_book_datasource_impl.dart';
+import 'controllers/home_controller.dart';
+import '../../../../../core/infrastructure/network/http_client/http_client_adapter_impl.dart';
+import '../../../../../core/infrastructure/network/http_client/http_client_adapter_interface.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -77,8 +77,11 @@ class HomeModule extends Module {
 
   static List<Bind> _getControllersBinds() {
     return [
-      Bind.lazySingleton<HomeController>(
-          (i) => HomeController(getBooksUsecase: i()))
+      Bind.lazySingleton<HomeController>((i) => HomeController(
+          getBooksUsecase: i(),
+          favoriteBookUsecase: i(),
+          unFavoriteBookUsecase: i(),
+          getFavoritesBooksUsecase: i()))
     ];
   }
 }

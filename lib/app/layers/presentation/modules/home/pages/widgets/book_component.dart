@@ -7,47 +7,41 @@ import '../../../../widgets/app_image.dart';
 import '../../../../widgets/app_subtitle_text.dart';
 import '../../../../widgets/app_title_text.dart';
 
-class BookComponent extends StatefulWidget {
-  const BookComponent({super.key, required this.bookEntity});
+class BookComponent extends StatelessWidget {
+  const BookComponent(
+      {super.key, required this.bookEntity, required this.favoriteBook});
 
   final BookEntity bookEntity;
+  final VoidCallback? favoriteBook;
 
-  @override
-  State<BookComponent> createState() => _BookComponentState();
-}
-
-class _BookComponentState extends State<BookComponent> {
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: MediaQuery.sizeOf(context).width,
-      child: Card(
-          child: Row(
-        children: [
-          _ImageBadge(
-            onBadgePressed: null,
-            imageUrl: widget.bookEntity.coverUrl,
-            isSelected: widget.bookEntity.isFavorite,
-          ),
-          Padding(
-            padding: const EdgeInsets.all(AppSizes.size10),
-            child: SizedBox(
-              width: MediaQuery.sizeOf(context).width - 230,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  AppTitleText(
-                    title: widget.bookEntity.title,
-                    textStyle: const TextStyle(fontSize: FontSize.fontSize24),
-                  ),
-                  AppSubTitleText(subTitle: widget.bookEntity.author)
-                ],
-              ),
+    return Card(
+        child: Row(
+      children: [
+        _ImageBadge(
+          onBadgePressed: favoriteBook,
+          imageUrl: bookEntity.coverUrl,
+          isSelected: bookEntity.isFavorite,
+        ),
+        Padding(
+          padding: const EdgeInsets.all(AppSizes.size10),
+          child: SizedBox(
+            width: MediaQuery.sizeOf(context).width - 230,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                AppTitleText(
+                  title: bookEntity.title,
+                  textStyle: const TextStyle(fontSize: FontSize.fontSize24),
+                ),
+                AppSubTitleText(subTitle: bookEntity.author)
+              ],
             ),
           ),
-        ],
-      )),
-    );
+        ),
+      ],
+    ));
   }
 }
 

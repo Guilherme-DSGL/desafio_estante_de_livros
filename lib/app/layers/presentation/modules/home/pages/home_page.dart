@@ -1,9 +1,9 @@
 import 'package:asuka/asuka.dart';
-import 'package:desafio_estante_de_livros/app/layers/presentation/modules/home/controllers/home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../widgets/app_title_text.dart';
+import '../controllers/home_controller.dart';
 import 'widgets/book_component.dart';
 import 'widgets/books_tab_view.dart';
 import 'widgets/favorites_tab_view.dart';
@@ -53,10 +53,23 @@ class _HomePageState extends State<HomePage> {
                     BooksTabView(
                       itemCount: state.books.length,
                       itemBuilder: (context, index) => BookComponent(
+                        favoriteBook: () {
+                          widget._homeController.toggleFavoriteBook(
+                              bookEntity: state.books[index]);
+                        },
                         bookEntity: state.books[index],
                       ),
                     ),
-                    const FavoritesTabView(),
+                    FavoritesTabView(
+                      itemCount: state.favoritesBooks.length,
+                      itemBuilder: (context, index) => BookComponent(
+                        favoriteBook: () {
+                          widget._homeController.toggleFavoriteBook(
+                              bookEntity: state.favoritesBooks[index]);
+                        },
+                        bookEntity: state.favoritesBooks[index],
+                      ),
+                    ),
                   ]);
                 },
               ),
