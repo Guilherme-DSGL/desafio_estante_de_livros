@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../../../../../../core/theme/app_colors.dart';
 import '../../../../../../../core/theme/app_sizes.dart';
@@ -21,8 +22,7 @@ class BookComponent extends StatelessWidget {
       children: [
         _ImageBadge(
           onBadgePressed: favoriteBook,
-          imageUrl: bookEntity.coverUrl,
-          isSelected: bookEntity.isFavorite,
+          bookEntity: bookEntity,
         ),
         Padding(
           padding: const EdgeInsets.all(AppSizes.size10),
@@ -33,7 +33,7 @@ class BookComponent extends StatelessWidget {
               children: [
                 AppTitleText(
                   title: bookEntity.title,
-                  textStyle: const TextStyle(fontSize: FontSize.fontSize24),
+                  maxLines: 2,
                 ),
                 AppSubTitleText(subTitle: bookEntity.author)
               ],
@@ -47,14 +47,12 @@ class BookComponent extends StatelessWidget {
 
 class _ImageBadge extends StatelessWidget {
   const _ImageBadge({
-    required this.imageUrl,
     required this.onBadgePressed,
-    required this.isSelected,
+    required this.bookEntity,
   });
 
-  final String imageUrl;
   final VoidCallback? onBadgePressed;
-  final bool isSelected;
+  final BookEntity bookEntity;
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +62,7 @@ class _ImageBadge extends StatelessWidget {
       backgroundColor: AppColors.transparent,
       label: IconButton(
           iconSize: AppSizes.size40,
-          isSelected: isSelected,
+          isSelected: bookEntity.isFavorite,
           selectedIcon: const Icon(Icons.bookmark, color: AppColors.red),
           splashRadius: AppSizes.size40,
           onPressed: () {
@@ -74,7 +72,14 @@ class _ImageBadge extends StatelessWidget {
             Icons.bookmark_border_outlined,
             color: AppColors.labelColor,
           )),
-      child: AppImage(imageUrl: imageUrl),
+      child: InkWell(
+          onTap: () {
+            Modular.to.pushNamed("/book-details", arguments: bookEntity);
+          },
+          child: Hero(
+              tag: bookEntity.id,
+              child: AppImage(
+                  height: AppSizes.size200, imageUrl: bookEntity.coverUrl))),
     );
   }
 }

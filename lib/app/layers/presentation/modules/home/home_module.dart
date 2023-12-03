@@ -19,6 +19,7 @@ import '../../../domain/use_cases/get_favorites_books/get_favorites_books_usecas
 import '../../../domain/use_cases/get_favorites_books/get_favorites_books_usecase_interface.dart';
 import '../../../domain/use_cases/un_favorite_book/un_favorite_book_usecase_impl.dart';
 import '../../../domain/use_cases/un_favorite_book/un_favorite_book_usecase_interface.dart';
+import 'pages/book_details_page.dart';
 import 'pages/home_page.dart';
 
 class HomeModule extends Module {
@@ -36,6 +37,8 @@ class HomeModule extends Module {
         child: ((context, args) => HomePage(
               homeController: Modular.get<HomeController>(),
             ))),
+    ChildRoute('/book-details',
+        child: ((context, args) => BookDetailsPage(bookEntity: args.data))),
   ];
 
   static List<Bind> _getInfraBinds() {

@@ -34,12 +34,15 @@ class HomeController extends Cubit<HomeState> {
     emit(state.copyWith(status: HomeStatus.loading));
     final favorites = await _fetchFavoritesBooks();
     final booksApi = await _fecthBooksApi();
-    final result = booksApi.map((e) {
-      if (favorites.contains(e)) {
-        return BookDTO.fromEntity(e).copyWith(isFavorite: true);
-      }
-      return e;
-    }).toList();
+    final result = booksApi
+        .map((e) {
+          if (favorites.contains(e)) {
+            return BookDTO.fromEntity(e).copyWith(isFavorite: true);
+          }
+          return e;
+        })
+        .toSet()
+        .toList();
     emit(state.copyWith(books: result, status: HomeStatus.loaded));
   }
 
@@ -83,7 +86,7 @@ class HomeController extends Cubit<HomeState> {
               ? BookDTO.fromEntity(e).copyWith(isFavorite: book.isFavorite)
               : e)
           .toList();
-      emit(state.copyWith(books: result));
+      emit(state.copyWith(books: result, status: HomeStatus.loaded));
     } catch (e, s) {
       log('[CONTROLLER] Favorite BOOK', error: e, stackTrace: s);
       emit(state.copyWith(
@@ -100,7 +103,7 @@ class HomeController extends Cubit<HomeState> {
               ? BookDTO.fromEntity(e).copyWith(isFavorite: book.isFavorite)
               : e)
           .toList();
-      emit(state.copyWith(books: result));
+      emit(state.copyWith(books: result, status: HomeStatus.loaded));
     } catch (e, s) {
       log('[CONTROLLER] unfavorite BOOKS ', error: e, stackTrace: s);
       emit(state.copyWith(

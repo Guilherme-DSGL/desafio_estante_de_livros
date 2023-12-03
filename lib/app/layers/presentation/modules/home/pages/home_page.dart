@@ -23,28 +23,31 @@ class _HomePageState extends State<HomePage> {
     super.initState();
   }
 
+  void listenState(BuildContext context, HomeState state) {
+    if (state.errorMessage != null) {
+      AsukaSnackbar.warning(state.errorMessage ?? "");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     const tabsList = [Tab(text: "Livros"), Tab(text: "Favoritos")];
     return BlocProvider(
       create: (context) => widget._homeController,
       child: DefaultTabController(
-        length: tabsList.length,
+        length: 2,
         child: Scaffold(
             appBar: AppBar(
-              title: const AppTitleText(
-                title: "Minha Estante ",
-              ),
-              bottom: const TabBar(tabs: tabsList),
+              title: const AppTitleText(title: "Minha Estante "),
+              bottom: const TabBar(tabs: [
+                Tab(text: "Livros"),
+                Tab(text: "Favoritos"),
+              ]),
             ),
             body: SizedBox(
               height: MediaQuery.sizeOf(context).height,
               child: BlocConsumer<HomeController, HomeState>(
-                listener: (context, state) {
-                  if (state.status == HomeStatus.failure) {
-                    AsukaMaterialBanner.alert(state.errorMessage ?? "");
-                  }
-                },
+                listener: listenState,
                 builder: (context, state) {
                   if (state.status == HomeStatus.loading) {
                     return const Center(child: CircularProgressIndicator());
