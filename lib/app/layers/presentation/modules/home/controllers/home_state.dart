@@ -33,7 +33,7 @@ class HomeState extends Equatable {
     return HomeState._(
       status: status ?? this.status,
       books: books ?? this.books,
-      errorMessage: errorMessage ?? this.errorMessage,
+      errorMessage: errorMessage,
     );
   }
 }

@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:sqflite/sqflite.dart';
 
 import '../../../../app/layers/data/dtos/book_dto.dart';
@@ -16,9 +14,7 @@ class BookService {
         bookDTO.toSQLMap(),
         conflictAlgorithm: ConflictAlgorithm.replace,
       );
-      log("Book inserido no banco ${bookDTO.title}");
     } catch (_) {
-      log(_.toString());
       throw LocalDBException();
     }
   }
@@ -41,9 +37,7 @@ class BookService {
         where: 'id = ?',
         whereArgs: [bookId],
       );
-      log("DELETE BOOK $bookId");
     } catch (_) {
-      log(_.toString());
       throw LocalDBException();
     }
   }

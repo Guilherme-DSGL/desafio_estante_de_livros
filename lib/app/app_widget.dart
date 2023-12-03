@@ -1,6 +1,5 @@
 import 'package:asuka/asuka.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import '../core/theme/app_theme.dart';

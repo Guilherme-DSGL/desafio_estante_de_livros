@@ -13,5 +13,17 @@ abstract class AppTheme {
     colorScheme: const ColorScheme.light(
       primary: AppColors.primaryColor,
     ),
+    tabBarTheme: TabBarTheme(
+        unselectedLabelStyle: AppTextTheme.primaryTheme.labelSmall,
+        labelStyle: AppTextTheme.primaryTheme.labelSmall),
+    cardTheme: const CardTheme(
+      shadowColor: AppColors.transparent,
+      surfaceTintColor: AppColors.transparent,
+    ),
+    badgeTheme: const BadgeThemeData(
+      backgroundColor: AppColors.primaryColor,
+      textStyle: TextStyle(fontSize: 10),
+      largeSize: 15,
+    ),
   );
 }

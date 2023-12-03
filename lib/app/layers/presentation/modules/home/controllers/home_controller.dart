@@ -1,15 +1,15 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
-import '../../../../data/dtos/book_dto.dart';
-import '../../../../domain/use_cases/favorite_book/favorite_book_usecase_interface.dart';
-import '../../../../domain/use_cases/get_favorites_books/get_favorites_books_usecase_interface.dart';
-import '../../../../domain/use_cases/un_favorite_book/un_favorite_book_usecase_interface.dart';
+import 'package:desafio_estante_de_livros/core/errors/messages.dart';
 import 'package:equatable/equatable.dart';
 
+import '../../../../data/dtos/book_dto.dart';
 import '../../../../domain/entities/book_entity.dart';
+import '../../../../domain/use_cases/favorite_book/favorite_book_usecase_interface.dart';
 import '../../../../domain/use_cases/get_books/get_books_usecase_interface.dart';
+import '../../../../domain/use_cases/get_favorites_books/get_favorites_books_usecase_interface.dart';
+import '../../../../domain/use_cases/un_favorite_book/un_favorite_book_usecase_interface.dart';
 
 part 'home_state.dart';
 
@@ -30,7 +30,7 @@ class HomeController extends Cubit<HomeState> {
         _getFavoritesBooksUsecase = getFavoritesBooksUsecase,
         super(const HomeState.initial());
 
-  fetchAllBooks() async {
+  Future<void> fetchAllBooks() async {
     emit(state.copyWith(status: HomeStatus.loading));
     final favorites = await _fetchFavoritesBooks();
     final booksApi = await _fecthBooksApi();
@@ -49,11 +49,10 @@ class HomeController extends Cubit<HomeState> {
   Future<List<BookEntity>> _fecthBooksApi() async {
     try {
       return await _getBooksUsecase.call();
-    } catch (e, s) {
-      log('[CONTROLLER] GET BOOKS ITEMS', error: e, stackTrace: s);
+    } catch (e) {
       emit(state.copyWith(
           status: HomeStatus.failure,
-          errorMessage: 'Não foi possível resgatar os livros'));
+          errorMessage: ErrorMessages.getBooksError));
       return List.empty();
     }
   }
@@ -61,11 +60,10 @@ class HomeController extends Cubit<HomeState> {
   Future<List<BookEntity>> _fetchFavoritesBooks() async {
     try {
       return await _getFavoritesBooksUsecase.call();
-    } catch (e, s) {
-      log('[CONTROLLER] GET BOOKS ITEMS', error: e, stackTrace: s);
+    } catch (e) {
       emit(state.copyWith(
           status: HomeStatus.failure,
-          errorMessage: 'Não foi possível resgatar os livros'));
+          errorMessage: ErrorMessages.getFavoritesBooksError));
       return List.empty();
     }
   }
@@ -87,11 +85,10 @@ class HomeController extends Cubit<HomeState> {
               : e)
           .toList();
       emit(state.copyWith(books: result, status: HomeStatus.loaded));
-    } catch (e, s) {
-      log('[CONTROLLER] Favorite BOOK', error: e, stackTrace: s);
+    } catch (e) {
       emit(state.copyWith(
           status: HomeStatus.failure,
-          errorMessage: 'Não foi possível favoritar o livro'));
+          errorMessage: ErrorMessages.favoriteBookError));
     }
   }
 
@@ -104,11 +101,10 @@ class HomeController extends Cubit<HomeState> {
               : e)
           .toList();
       emit(state.copyWith(books: result, status: HomeStatus.loaded));
-    } catch (e, s) {
-      log('[CONTROLLER] unfavorite BOOKS ', error: e, stackTrace: s);
+    } catch (e) {
       emit(state.copyWith(
           status: HomeStatus.failure,
-          errorMessage: 'Não foi possível desfavoritar o livro'));
+          errorMessage: ErrorMessages.unfavoreteBookError));
     }
   }
 }

@@ -1,17 +1,23 @@
 import 'package:asuka/asuka.dart';
+import 'package:desafio_estante_de_livros/app/layers/presentation/widgets/app_subtitle_text.dart';
+import 'package:desafio_estante_de_livros/core/theme/app_sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../widgets/app_title_text.dart';
+import '../controllers/download_book_controller.dart';
 import '../controllers/home_controller.dart';
-import 'widgets/book_component.dart';
 import 'widgets/books_tab_view.dart';
-import 'widgets/favorites_tab_view.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key, required HomeController homeController})
-      : _homeController = homeController;
+  const HomePage(
+      {super.key,
+      required HomeController homeController,
+      required DownloadBookController downloadBookController})
+      : _homeController = homeController,
+        _downloadBookController = downloadBookController;
   final HomeController _homeController;
+  final DownloadBookController _downloadBookController;
   @override
   State<HomePage> createState() => _HomePageState();
 }
@@ -25,58 +31,53 @@ class _HomePageState extends State<HomePage> {
 
   void listenState(BuildContext context, HomeState state) {
     if (state.errorMessage != null) {
-      AsukaSnackbar.warning(state.errorMessage ?? "");
+      AsukaSnackbar.warning(state.errorMessage ?? "").show();
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    const tabsList = [Tab(text: "Livros"), Tab(text: "Favoritos")];
-    return BlocProvider(
-      create: (context) => widget._homeController,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => widget._homeController),
+        BlocProvider(create: (context) => widget._downloadBookController)
+      ],
       child: DefaultTabController(
         length: 2,
         child: Scaffold(
-            appBar: AppBar(
-              title: const AppTitleText(title: "Minha Estante "),
-              bottom: const TabBar(tabs: [
-                Tab(text: "Livros"),
-                Tab(text: "Favoritos"),
-              ]),
-            ),
-            body: SizedBox(
-              height: MediaQuery.sizeOf(context).height,
-              child: BlocConsumer<HomeController, HomeState>(
-                listener: listenState,
+          appBar: AppBar(
+            title: const AppTitleText(title: "Minha Estante "),
+            bottom: TabBar(tabs: [
+              const Tab(text: "Livros"),
+              BlocBuilder<HomeController, HomeState>(
                 builder: (context, state) {
-                  if (state.status == HomeStatus.loading) {
-                    return const Center(child: CircularProgressIndicator());
-                  }
-                  return TabBarView(children: [
-                    BooksTabView(
-                      itemCount: state.books.length,
-                      itemBuilder: (context, index) => BookComponent(
-                        favoriteBook: () {
-                          widget._homeController.toggleFavoriteBook(
-                              bookEntity: state.books[index]);
-                        },
-                        bookEntity: state.books[index],
-                      ),
-                    ),
-                    FavoritesTabView(
-                      itemCount: state.favoritesBooks.length,
-                      itemBuilder: (context, index) => BookComponent(
-                        favoriteBook: () {
-                          widget._homeController.toggleFavoriteBook(
-                              bookEntity: state.favoritesBooks[index]);
-                        },
-                        bookEntity: state.favoritesBooks[index],
-                      ),
-                    ),
-                  ]);
+                  return Badge.count(
+                      isLabelVisible: state.favoritesBooks.isNotEmpty,
+                      largeSize: 15,
+                      count: state.favoritesBooks.length,
+                      child: const Tab(text: "Favoritos"));
                 },
               ),
-            )),
+            ]),
+          ),
+          body: SizedBox(
+            height: MediaQuery.sizeOf(context).height,
+            child: BlocConsumer<HomeController, HomeState>(
+              listenWhen: (previous, current) =>
+                  previous.status != current.status,
+              listener: listenState,
+              builder: (context, state) {
+                if (state.status == HomeStatus.loading) {
+                  return const Center(child: CircularProgressIndicator());
+                }
+                return BooksTabView(
+                  books: state.books,
+                  favoritesBooks: state.favoritesBooks,
+                );
+              },
+            ),
+          ),
+        ),
       ),
     );
   }

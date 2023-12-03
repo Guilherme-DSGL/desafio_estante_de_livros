@@ -1,3 +1,7 @@
+import '../../../domain/use_cases/download_book/download_book_usecase_impl.dart';
+import '../../../domain/use_cases/download_book/download_book_usecase_interface.dart';
+import 'controllers/download_book_controller.dart';
+
 import '../../../data/datasources/remote/remote_book_datasource_impl.dart';
 import 'controllers/home_controller.dart';
 import '../../../../../core/infrastructure/network/http_client/http_client_adapter_impl.dart';
@@ -36,6 +40,7 @@ class HomeModule extends Module {
     ChildRoute('/',
         child: ((context, args) => HomePage(
               homeController: Modular.get<HomeController>(),
+              downloadBookController: Modular.get<DownloadBookController>(),
             ))),
     ChildRoute('/book-details',
         child: ((context, args) => BookDetailsPage(bookEntity: args.data))),
@@ -75,6 +80,8 @@ class HomeModule extends Module {
           (i) => FavoriteBookUseCaseImpl(bookRepository: i())),
       Bind.lazySingleton<IUnFavoriteBookUsecase>(
           (i) => UnFavoriteBookUseCaseImpl(bookRepository: i())),
+      Bind.lazySingleton<IDownloadBookUsecase>(
+          (i) => DownloadBookUsecaseImpl(bookrepository: i())),
     ];
   }
 
@@ -84,7 +91,9 @@ class HomeModule extends Module {
           getBooksUsecase: i(),
           favoriteBookUsecase: i(),
           unFavoriteBookUsecase: i(),
-          getFavoritesBooksUsecase: i()))
+          getFavoritesBooksUsecase: i())),
+      Bind.lazySingleton<DownloadBookController>(
+          (i) => DownloadBookController(downloadBookUsecase: i()))
     ];
   }
 }

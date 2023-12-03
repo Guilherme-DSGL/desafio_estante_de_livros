@@ -5,4 +5,8 @@ abstract interface class IBookRepository {
   Future<BookEntity> favoriteBook({required BookEntity bookEntity});
   Future<BookEntity> unFavoriteBook({required BookEntity bookEntity});
   Future<List<BookEntity>> getFavoritesBooks();
+  Future<void> downloadBook({
+    required String downloadUrl,
+    required String pathDirectory,
+  });
 }

@@ -8,4 +8,6 @@ abstract interface class ILocalBookDataSource {
 
 abstract interface class IRemoteBookDataSource {
   Future<List<BookEntity>> getBooks();
+  Future<void> downloadBook(
+      {required String downloadUrl, required String pathDirectory});
 }

@@ -31,4 +31,11 @@ class BookRepositoryImpl implements IBookRepository {
   Future<List<BookEntity>> getFavoritesBooks() {
     return _localBookRepository.getBooksFavorite();
   }
+
+  @override
+  Future<void> downloadBook(
+      {required String downloadUrl, required String pathDirectory}) async {
+    await _remoteBookRepository.downloadBook(
+        downloadUrl: downloadUrl, pathDirectory: pathDirectory);
+  }
 }

@@ -3,12 +3,12 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i4;
+import 'dart:async' as _i2;
 
 import 'package:desafio_estante_de_livros/core/infrastructure/network/http_client/http_client_adapter_impl.dart'
     as _i3;
-import 'package:http/http.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
+import 'package:mockito/src/dummies.dart' as _i4;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -23,8 +23,8 @@ import 'package:mockito/mockito.dart' as _i1;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-class _FakeResponse_0 extends _i1.SmartFake implements _i2.Response {
-  _FakeResponse_0(
+class _FakeFuture_0<T1> extends _i1.SmartFake implements _i2.Future<T1> {
+  _FakeFuture_0(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -39,32 +39,66 @@ class _FakeResponse_0 extends _i1.SmartFake implements _i2.Response {
 class MockHttpClientAdapterImpl extends _i1.Mock
     implements _i3.HttpClientAdapterImpl {
   @override
-  _i4.Future<_i2.Response> get(
-    String? path, {
-    Map<String, String>? headers,
-  }) =>
-      (super.noSuchMethod(
+  _i2.Future<T> get<T>(String? path) => (super.noSuchMethod(
         Invocation.method(
           #get,
           [path],
-          {#headers: headers},
         ),
-        returnValue: _i4.Future<_i2.Response>.value(_FakeResponse_0(
-          this,
-          Invocation.method(
-            #get,
-            [path],
-            {#headers: headers},
-          ),
-        )),
-        returnValueForMissingStub:
-            _i4.Future<_i2.Response>.value(_FakeResponse_0(
-          this,
-          Invocation.method(
-            #get,
-            [path],
-            {#headers: headers},
-          ),
-        )),
-      ) as _i4.Future<_i2.Response>);
+        returnValue: _i4.ifNotNull(
+              _i4.dummyValueOrNull<T>(
+                this,
+                Invocation.method(
+                  #get,
+                  [path],
+                ),
+              ),
+              (T v) => _i2.Future<T>.value(v),
+            ) ??
+            _FakeFuture_0<T>(
+              this,
+              Invocation.method(
+                #get,
+                [path],
+              ),
+            ),
+        returnValueForMissingStub: _i4.ifNotNull(
+              _i4.dummyValueOrNull<T>(
+                this,
+                Invocation.method(
+                  #get,
+                  [path],
+                ),
+              ),
+              (T v) => _i2.Future<T>.value(v),
+            ) ??
+            _FakeFuture_0<T>(
+              this,
+              Invocation.method(
+                #get,
+                [path],
+              ),
+            ),
+      ) as _i2.Future<T>);
+
+  @override
+  _i2.Future<void> download({
+    required String? downloadUrl,
+    required String? pathDirectory,
+    void Function()? onComplete,
+    void Function()? onError,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #download,
+          [],
+          {
+            #downloadUrl: downloadUrl,
+            #pathDirectory: pathDirectory,
+            #onComplete: onComplete,
+            #onError: onError,
+          },
+        ),
+        returnValue: _i2.Future<void>.value(),
+        returnValueForMissingStub: _i2.Future<void>.value(),
+      ) as _i2.Future<void>);
 }

@@ -18,11 +18,17 @@ class AppImage extends StatelessWidget {
     return CachedNetworkImage(
       imageUrl: imageUrl,
       imageBuilder: (context, imageProvider) {
-        return Image(
-          height: height,
-          width: width,
-          image: imageProvider,
-          fit: BoxFit.contain,
+        return Container(
+          decoration: BoxDecoration(
+              border: Border.all(
+            color: AppColors.borderColor,
+          )),
+          child: Image(
+            height: height,
+            width: width,
+            image: imageProvider,
+            fit: BoxFit.fitWidth,
+          ),
         );
       },
       errorWidget: (context, url, error) => Container(
