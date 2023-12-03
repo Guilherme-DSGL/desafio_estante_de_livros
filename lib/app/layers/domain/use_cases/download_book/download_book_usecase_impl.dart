@@ -16,8 +16,15 @@ class DownloadBookUsecaseImpl implements IDownloadBookUsecase {
     required String pathDirectory,
   }) async {
     File file = File(pathDirectory);
-    await file.create();
-    await _bookRepository.downloadBook(
-        downloadUrl: downloadUrl, pathDirectory: pathDirectory);
+    try {
+      await file.create();
+      await _bookRepository.downloadBook(
+          downloadUrl: downloadUrl, pathDirectory: pathDirectory);
+    } catch (e) {
+      if (file.existsSync()) {
+        file.deleteSync();
+      }
+      rethrow;
+    }
   }
 }
