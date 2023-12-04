@@ -12,7 +12,7 @@ O desafio consistia em desenvolver uma aplição Flutter que faça requisição 
 ## Clonando o projeto 💻
 
 Para rodar o projeto use os seguintes comandos
-> O projeto foi desenvolvido para as plataformas Android.
+> O projeto foi desenvolvido para a plataforma Android e IOS.
 
 ```bash
 git clone https://github.com/Guilherme-DSGL/desafio_estante_de_livros.git
