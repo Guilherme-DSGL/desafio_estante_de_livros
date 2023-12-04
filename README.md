@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://github.com/Guilherme-DSGL/desafio_estante_de_livros/blob/main/assets/images/app_icon.png" alt="LB" height="150px">
+  <img width="250" height="250" src="https://github.com/Guilherme-DSGL/desafio_estante_de_livros/assets/72310683/9a0c53ff-3249-4db6-9cee-70682bb2b4d1" alt="LB" height="150px">
 </div>
 
 # Leitor de Ebook 
@@ -43,7 +43,8 @@ Primeiramente foi elaborado um design para a aplicação no [figma](https://www.
 * [x] Request a API. 
 * [x] Versionamento de código
 * [ ] Botão de voltar dentro do vizualizador Epub (Esse foi meu primeiro contato com o Vocsy Epub Viewer e pelas minhas conclusões  
-      seria necessário fazer uma comununicação com o FolioReaderKit via platform channel utilizando código nativo android e ios)
+      seria necessário fazer uma comununicação com o FolioReaderKit via platform channel utilizando código nativo android e ios.
+      Mesmo sem o botão o usuário ainda consegue retornar pela a ação de voltar do sistema nativo)
 
 ## Adicionais
 
@@ -51,6 +52,8 @@ Primeiramente foi elaborado um design para a aplicação no [figma](https://www.
 * [x] Testes
 * [x] Aplicação modularizada
 * [x] Bloc - Cubit
+* [X] Cache Image
+* [X] Modular 
 
 ## Desenvolvedor
 
