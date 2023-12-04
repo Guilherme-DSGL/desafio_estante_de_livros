@@ -47,8 +47,7 @@ Primeiramente foi elaborado um design para a aplicação no [figma](https://www.
 * [x] Request a API. 
 * [x] Versionamento de código
 * [ ] Botão de voltar dentro do vizualizador Epub (Esse foi meu primeiro contato com o Vocsy Epub Viewer e pelas minhas conclusões  
-      seria necessário fazer uma comununicação com o FolioReaderKit via platform channel utilizando código nativo android e ios.
-      Mesmo sem o botão o usuário ainda consegue retornar pela a ação de voltar do sistema nativo)
+      seria necessário fazer uma comununicação com o FolioReaderKit via platform channel utilizando código nativo android e ios. Mesmo sem o botão o usuário ainda consegue retornar pela a ação de voltar do sistema nativo)
 
 ## Adicionais
 
