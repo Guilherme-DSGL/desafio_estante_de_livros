@@ -15,7 +15,7 @@ Para rodar o projeto use os seguintes comandos
 > O projeto foi desenvolvido para as plataformas Android.
 
 ```bash
-git clone https://github.com/KaueSena01/vr_challenge
+git clone https://github.com/Guilherme-DSGL/desafio_estante_de_livros.git
 flutter clean ; flutter pub get
 ```
 ```bash
