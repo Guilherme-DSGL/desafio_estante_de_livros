@@ -16,7 +16,11 @@ Para rodar o projeto use os seguintes comandos
 
 ```bash
 git clone https://github.com/Guilherme-DSGL/desafio_estante_de_livros.git
-flutter clean ; flutter pub get
+cd desafio_estante_de_livros
+```
+```bash
+flutter clean
+flutter pub get
 ```
 ```bash
 flutter run
