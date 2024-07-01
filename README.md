@@ -35,10 +35,6 @@ Primeiramente foi elaborado um design para a aplicação no [figma](https://www.
     <img width="500" alt="" src="https://github.com/Guilherme-DSGL/desafio_estante_de_livros/assets/72310683/ebc5fb9d-5d4f-4d0c-90c1-a5b18ddb7acd">
   </div>
 
-## APK do projeto 🚀
-
-[APK RELEASE](https://github.com/Guilherme-DSGL/desafio_estante_de_livros/blob/main/apk/app-release.apk)
-
 ## Pré requisitos ✔
 
 * [x] Flutter na versão 3.16.2
