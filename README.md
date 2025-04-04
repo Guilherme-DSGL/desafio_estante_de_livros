@@ -1,6 +1,4 @@
-<div align="center">
-  <img width="250" height="250" src="https://github.com/Guilherme-DSGL/desafio_estante_de_livros/assets/72310683/9a0c53ff-3249-4db6-9cee-70682bb2b4d1" alt="LB" height="150px">
-</div>
+
 
 # Leitor de Ebook 
 
