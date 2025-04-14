@@ -1,6 +1,4 @@
 import 'package:asuka/asuka.dart';
-import 'package:desafio_estante_de_livros/app/layers/presentation/widgets/app_subtitle_text.dart';
-import 'package:desafio_estante_de_livros/core/theme/app_sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

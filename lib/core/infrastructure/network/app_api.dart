@@ -1,3 +1,3 @@
 abstract class AppApi {
-  static const String getBooksURl = "https://escribo.com/books.json";
+  static const String getBooksURl = String.fromEnvironment("API_URL");
 }

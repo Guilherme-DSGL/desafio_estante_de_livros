@@ -24,8 +24,16 @@ class DownloadBookController extends Cubit<DownloadBookState> {
     emit(state.copyWith(status: DownloadBookStatus.initial));
     String path = await FileHelper.createPathToDownload(bookEntity.downloadUrl);
     if (!FileHelper.existFile(path)) {
-      await _donwload(bookEntity);
-      EpubViewService.instance.openAsset(path);
+      try {
+        await _donwload(bookEntity);
+        EpubViewService.instance.openAsset(path);
+      } catch (e) {
+        state.booksInDownload.remove(bookEntity);
+        emit(state.copyWith(
+            errorMessage: ErrorMessages.downloadBookError,
+            booksInDownload: state.booksInDownload,
+            status: DownloadBookStatus.failure));
+      }
     } else {
       EpubViewService.instance.openAsset(path);
     }
@@ -88,19 +96,11 @@ class DownloadBookController extends Cubit<DownloadBookState> {
     emit(state.copyWith(
         status: DownloadBookStatus.loading,
         booksInDownload: {bookEntity, ...state.booksInDownload}));
-    try {
-      await _downloadBookUsecase.call(
-          downloadUrl: bookEntity.downloadUrl, pathDirectory: path);
-      state.booksInDownload.remove(bookEntity);
-      emit(state.copyWith(
-          status: DownloadBookStatus.loaded,
-          booksInDownload: state.booksInDownload));
-    } catch (e) {
-      state.booksInDownload.remove(bookEntity);
-      emit(state.copyWith(
-          errorMessage: ErrorMessages.downloadBookError,
-          booksInDownload: state.booksInDownload,
-          status: DownloadBookStatus.failure));
-    }
+    await _downloadBookUsecase.call(
+        downloadUrl: bookEntity.downloadUrl, pathDirectory: path);
+    state.booksInDownload.remove(bookEntity);
+    emit(state.copyWith(
+        status: DownloadBookStatus.loaded,
+        booksInDownload: state.booksInDownload));
   }
 }
