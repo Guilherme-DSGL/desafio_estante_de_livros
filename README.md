@@ -13,7 +13,7 @@ Para rodar o projeto use os seguintes comandos
 > O projeto foi desenvolvido para a plataforma Android e IOS.
 
 ```bash
-git clone https://github.com/Guilherme-DSGL/desafio_estante_de_livros.git
+git clone https://github.com/Guilherme-DSGL/app_epub_reader.git
 cd desafio_estante_de_livros
 ```
 ```bash
