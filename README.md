@@ -14,7 +14,7 @@ Para rodar o projeto use os seguintes comandos
 
 ```bash
 git clone https://github.com/Guilherme-DSGL/app_epub_reader.git
-cd desafio_estante_de_livros
+cd app_epub_reader
 ```
 ```bash
 flutter clean
