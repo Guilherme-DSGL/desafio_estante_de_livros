@@ -1,11 +1,11 @@
 name: desafio_estante_de_livros
 description: "A new Flutter project."
-publish_to: 'none' 
+publish_to: "none"
 
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.2.2 <4.0.0'
+  sdk: ">=3.4.4 <4.0.0"
 
 dependencies:
   flutter:
@@ -16,7 +16,7 @@ dependencies:
   # Modular
   flutter_modular: ^5.0.3
   modular_bloc_bind: ^1.0.1
-  
+
   # State Management
   bloc: ^8.1.2
   flutter_bloc: ^8.1.3
@@ -24,8 +24,8 @@ dependencies:
   # General
   equatable: ^2.0.5
   intl: ^0.18.0
-  asuka: ^2.0.2
-  vocsy_epub_viewer: ^2.0.0
+  asuka: ^2.2.1
+  vocsy_epub_viewer: ^3.0.0
   sqflite: ^2.3.0
   path: ^1.8.3
   http: ^1.1.2
@@ -41,8 +41,8 @@ dev_dependencies:
     sdk: flutter
 
   #General
-  flutter_lints: ^2.0.0
   sqflite_common_ffi: ^2.3.0+4
+  flutter_lints: ^2.0.0
 
   #Tests
   mockito: ^5.4.3
@@ -65,11 +65,8 @@ flutter_native_splash:
   ios: true
 
 flutter:
-
   uses-material-design: true
-
 
   assets:
     - assets/images/
   #   - images/a_dot_ham.jpeg
-

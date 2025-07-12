@@ -1,7 +1,7 @@
-import 'package:desafio_estante_de_livros/core/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
+import '../../../../../../../core/routes/routes.dart';
 import '../../../../../../../core/theme/app_sizes.dart';
 import '../../../../../domain/entities/book_entity.dart';
 import '../../../../widgets/app_subtitle_text.dart';
@@ -9,11 +9,12 @@ import '../../../../widgets/app_title_text.dart';
 import 'image_badge.dart';
 
 class BookComponent extends StatelessWidget {
-  const BookComponent(
-      {super.key,
-      required this.bookEntity,
-      required this.favoriteBook,
-      required this.isDownloading});
+  const BookComponent({
+    required this.bookEntity,
+    required this.favoriteBook,
+    required this.isDownloading,
+    super.key,
+  });
 
   final BookEntity bookEntity;
   final VoidCallback? favoriteBook;
@@ -21,7 +22,7 @@ class BookComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final listWidgets = [
+    final List<Widget> listWidgets = [
       Stack(
         children: [
           ImageBadge(
@@ -31,10 +32,10 @@ class BookComponent extends StatelessWidget {
           SizedBox(
             width: AppSizes.size140,
             child: Align(
-              alignment: Alignment.center,
               child: Visibility(
-                  visible: isDownloading,
-                  child: const Center(child: CircularProgressIndicator())),
+                visible: isDownloading,
+                child: const Center(child: CircularProgressIndicator()),
+              ),
             ),
           ),
         ],
@@ -59,24 +60,26 @@ class BookComponent extends StatelessWidget {
               AppSubTitleText(
                 subTitle: bookEntity.author,
                 textStyle: const TextStyle(fontSize: FontSize.fontSize12),
-              )
+              ),
             ],
           ),
         ),
       ),
     ];
-    return Card(child: LayoutBuilder(
-      builder: (context, constrains) {
-        if (MediaQuery.orientationOf(context) == Orientation.portrait) {
-          return Row(
-            children: listWidgets,
-          );
-        } else {
-          return Column(
-            children: listWidgets,
-          );
-        }
-      },
-    ));
+    return Card(
+      child: LayoutBuilder(
+        builder: (context, constrains) {
+          if (MediaQuery.orientationOf(context) == Orientation.portrait) {
+            return Row(
+              children: listWidgets,
+            );
+          } else {
+            return Column(
+              children: listWidgets,
+            );
+          }
+        },
+      ),
+    );
   }
 }

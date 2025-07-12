@@ -20,7 +20,7 @@ class LocalDBProviderImpl implements ILocalDBProvider<Database> {
   }
 
   Future<Database> _initDatabase() async {
-    final path = await getDatabasesPath();
+    final String path = await getDatabasesPath();
     return openDatabase(
       join(path, 'database.db'),
       version: 1,

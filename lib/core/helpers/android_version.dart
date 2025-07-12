@@ -11,8 +11,8 @@ abstract class AndroidVersionHelper {
   static Future<int> getVersionNumber() async {
     final String version = await getVersion();
     String? firstPart;
-    if (version.toString().contains(".")) {
-      int indexOfFirstDot = version.indexOf(".");
+    if (version.contains('.')) {
+      final int indexOfFirstDot = version.indexOf('.');
       firstPart = version.substring(0, indexOfFirstDot);
     } else {
       firstPart = version;

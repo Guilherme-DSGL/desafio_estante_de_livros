@@ -4,7 +4,9 @@ import 'app_colors.dart';
 import 'app_text_theme.dart';
 
 abstract class AppTheme {
-  static final ThemeData themeData = ThemeData(
+  AppTheme._();
+
+  static final themeData = ThemeData(
     primaryColor: AppColors.primaryColor,
     scaffoldBackgroundColor: AppColors.whiteColor,
     textTheme: AppTextTheme.primaryTheme,
@@ -14,8 +16,9 @@ abstract class AppTheme {
       primary: AppColors.primaryColor,
     ),
     tabBarTheme: TabBarTheme(
-        unselectedLabelStyle: AppTextTheme.primaryTheme.labelSmall,
-        labelStyle: AppTextTheme.primaryTheme.labelSmall),
+      unselectedLabelStyle: AppTextTheme.primaryTheme.labelSmall,
+      labelStyle: AppTextTheme.primaryTheme.labelSmall,
+    ),
     cardTheme: const CardTheme(
       shadowColor: AppColors.transparent,
       surfaceTintColor: AppColors.transparent,

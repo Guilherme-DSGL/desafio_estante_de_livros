@@ -4,12 +4,14 @@ import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_theme.dart';
 
 class AppTitleText extends StatelessWidget {
-  const AppTitleText(
-      {super.key,
-      required this.title,
-      this.textStyle,
-      this.softWrap = true,
-      this.maxLines = 1});
+  const AppTitleText({
+    required this.title,
+    this.textStyle,
+    this.softWrap = true,
+    this.maxLines = 1,
+    super.key,
+  });
+
   final String title;
   final bool? softWrap;
   final int? maxLines;

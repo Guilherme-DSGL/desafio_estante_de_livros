@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -10,15 +12,16 @@ import '../../../widgets/app_title_text.dart';
 import '../controllers/download_book_controller.dart';
 
 class BookDetailsPage extends StatefulWidget {
-  const BookDetailsPage({super.key, required this.bookEntity});
+  const BookDetailsPage({required this.bookEntity, super.key});
   final BookEntity bookEntity;
   @override
   State<BookDetailsPage> createState() => _BookDetailsPageState();
 }
 
 class _BookDetailsPageState extends State<BookDetailsPage> {
-  final downloadController = Modular.get<DownloadBookController>();
-  bool existBook = false;
+  final DownloadBookController downloadController =
+      Modular.get<DownloadBookController>();
+  var existBook = false;
 
   @override
   void initState() {
@@ -26,7 +29,7 @@ class _BookDetailsPageState extends State<BookDetailsPage> {
     super.initState();
   }
 
-  void exixtsBook() async {
+  Future<void> exixtsBook() async {
     existBook = await downloadController.existFile(widget.bookEntity);
   }
 
@@ -37,60 +40,59 @@ class _BookDetailsPageState extends State<BookDetailsPage> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: AppTitleText(title: widget.bookEntity.title, softWrap: false),
-      ),
-      body: SingleChildScrollView(
-        child: Container(
-          width: MediaQuery.sizeOf(context).width,
-          padding: const EdgeInsets.only(
-              left: AppSizes.size20, top: AppSizes.size20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Hero(
-                tag: widget.bookEntity.id,
-                child: AppImage(
-                  width: AppSizes.size250,
-                  imageUrl: widget.bookEntity.coverUrl,
+  Widget build(BuildContext context) => Scaffold(
+        appBar: AppBar(
+          title: AppTitleText(title: widget.bookEntity.title, softWrap: false),
+        ),
+        body: SingleChildScrollView(
+          child: Container(
+            width: MediaQuery.sizeOf(context).width,
+            padding: const EdgeInsets.only(
+              left: AppSizes.size20,
+              top: AppSizes.size20,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Hero(
+                  tag: widget.bookEntity.id,
+                  child: AppImage(
+                    width: AppSizes.size250,
+                    imageUrl: widget.bookEntity.coverUrl,
+                  ),
                 ),
-              ),
-              const SizedBox(height: AppSizes.size20),
-              AppTitleText(
-                title: widget.bookEntity.title,
-                softWrap: true,
-                maxLines: 2,
-              ),
-              AppSubTitleText(subTitle: widget.bookEntity.author),
-              BlocBuilder<DownloadBookController, DownloadBookState>(
-                bloc: Modular.get<DownloadBookController>(),
-                builder: (context, state) {
-                  return SizedBox(
+                const SizedBox(height: AppSizes.size20),
+                AppTitleText(
+                  title: widget.bookEntity.title,
+                  maxLines: 2,
+                ),
+                AppSubTitleText(subTitle: widget.bookEntity.author),
+                BlocBuilder<DownloadBookController, DownloadBookState>(
+                  bloc: Modular.get<DownloadBookController>(),
+                  builder: (context, state) => SizedBox(
                     width: AppSizes.size150,
                     child: ElevatedButton(
                       onPressed: !(state.status == DownloadBookStatus.loading)
                           ? () async {
                               await downloadController
                                   .openBook(widget.bookEntity);
-                              exixtsBook();
+                              unawaited(exixtsBook());
                             }
                           : null,
                       child: Visibility(
-                          visible: state.status != DownloadBookStatus.loading,
-                          replacement: const CircularProgressIndicator(),
-                          child: AppSubTitleText(
-                              subTitle: existBook ? "Ler Agora" : "Downaload")),
+                        visible: state.status != DownloadBookStatus.loading,
+                        replacement: const CircularProgressIndicator(),
+                        child: AppSubTitleText(
+                          subTitle: existBook ? 'Ler Agora' : 'Downaload',
+                        ),
+                      ),
                     ),
-                  );
-                },
-              ),
-              const SizedBox(height: AppSizes.size50)
-            ],
+                  ),
+                ),
+                const SizedBox(height: AppSizes.size50),
+              ],
+            ),
           ),
         ),
-      ),
-    );
-  }
+      );
 }

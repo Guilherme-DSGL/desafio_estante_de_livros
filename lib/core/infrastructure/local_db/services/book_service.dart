@@ -6,10 +6,12 @@ import '../../../errors/exceptions.dart';
 class BookService {
   BookService._();
 
-  static Future<void> insertBook(
-      {required BookDTO bookDTO, required Database database}) async {
+  static Future<void> insertBook({
+    required BookDTO bookDTO,
+    required Database database,
+  }) async {
     try {
-      database.insert(
+      await database.insert(
         'books',
         bookDTO.toSQLMap(),
         conflictAlgorithm: ConflictAlgorithm.replace,
@@ -29,8 +31,10 @@ class BookService {
     ).reversed.toList();
   }
 
-  static Future<void> deleteBook(
-      {required int bookId, required Database database}) async {
+  static Future<void> deleteBook({
+    required int bookId,
+    required Database database,
+  }) async {
     try {
       await database.delete(
         'books',

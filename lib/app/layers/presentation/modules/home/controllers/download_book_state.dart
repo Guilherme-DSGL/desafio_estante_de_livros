@@ -3,10 +3,6 @@ part of 'download_book_controller.dart';
 enum DownloadBookStatus { initial, loading, loaded, failure }
 
 class DownloadBookState extends Equatable {
-  final DownloadBookStatus status;
-  final Set<BookEntity> booksInDownload;
-  final String? errorMessage;
-
   const DownloadBookState._({
     required this.status,
     required this.booksInDownload,
@@ -19,6 +15,10 @@ class DownloadBookState extends Equatable {
           status: DownloadBookStatus.initial,
         );
 
+  final DownloadBookStatus status;
+  final Set<BookEntity> booksInDownload;
+  final String? errorMessage;
+
   @override
   List<Object?> get props => [status, errorMessage, booksInDownload];
 
@@ -26,11 +26,10 @@ class DownloadBookState extends Equatable {
     DownloadBookStatus? status,
     Set<BookEntity>? booksInDownload,
     String? errorMessage,
-  }) {
-    return DownloadBookState._(
-      status: status ?? this.status,
-      booksInDownload: booksInDownload ?? this.booksInDownload,
-      errorMessage: errorMessage,
-    );
-  }
+  }) =>
+      DownloadBookState._(
+        status: status ?? this.status,
+        booksInDownload: booksInDownload ?? this.booksInDownload,
+        errorMessage: errorMessage,
+      );
 }

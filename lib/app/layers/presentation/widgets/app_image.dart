@@ -5,11 +5,12 @@ import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_sizes.dart';
 
 class AppImage extends StatelessWidget {
-  const AppImage(
-      {super.key,
-      required this.imageUrl,
-      this.height,
-      this.width = AppSizes.size140});
+  const AppImage({
+    required this.imageUrl,
+    super.key,
+    this.height,
+    this.width = AppSizes.size140,
+  });
   final String imageUrl;
   final double? height;
   final double? width;
@@ -18,11 +19,12 @@ class AppImage extends StatelessWidget {
     return CachedNetworkImage(
       imageUrl: imageUrl,
       imageBuilder: (context, imageProvider) {
-        return Container(
+        return DecoratedBox(
           decoration: BoxDecoration(
-              border: Border.all(
-            color: AppColors.borderColor,
-          )),
+            border: Border.all(
+              color: AppColors.borderColor,
+            ),
+          ),
           child: Image(
             height: height,
             width: width,
@@ -34,9 +36,10 @@ class AppImage extends StatelessWidget {
       errorWidget: (context, url, error) => Container(
         height: height,
         decoration: BoxDecoration(
-            border: Border.all(
-          color: AppColors.borderColor,
-        )),
+          border: Border.all(
+            color: AppColors.borderColor,
+          ),
+        ),
         child: const Icon(
           Icons.broken_image_outlined,
           size: 45,

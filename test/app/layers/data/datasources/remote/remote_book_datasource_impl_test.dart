@@ -12,7 +12,7 @@ import 'remote_book_datasource_impl_test.mocks.dart';
   MockSpec<HttpClientAdapterImpl>(),
 ])
 void main() {
-  group("Remote Data Source", () {
+  group('Remote Data Source', () {
     late Map<String, dynamic> response;
     late IRemoteBookDataSource remoteBookDataSource;
     late MockHttpClientAdapterImpl mockHttpClientAdapter;
@@ -21,19 +21,20 @@ void main() {
       remoteBookDataSource =
           RemoteBookDataSourceImpl(httpClientAdapter: mockHttpClientAdapter);
       response = {
-        "id": 1,
-        "title": "The Bible of Nature",
-        "author": "Oswald, Felix L.",
-        "cover_url":
-            "https://www.gutenberg.org/cache/epub/72134/pg72134.cover.medium.jpg",
-        "download_url": "https://www.gutenberg.org/ebooks/72134.epub3.images"
+        'id': 1,
+        'title': 'The Bible of Nature',
+        'author': 'Oswald, Felix L.',
+        'cover_url':
+            'https://www.gutenberg.org/cache/epub/72134/pg72134.cover.medium.jpg',
+        'download_url': 'https://www.gutenberg.org/ebooks/72134.epub3.images',
       };
     });
     test('deve chamar HttpClientAdapter', () async {
       when(mockHttpClientAdapter.get<List>(any)).thenAnswer(
         (_) async => [response],
       );
-      final result = remoteBookDataSource.getBooks();
+      final Future<List<BookEntity>> result =
+          remoteBookDataSource.getBooks(page: 1);
       expect(result, isA<Future<List<BookEntity>>>());
     });
   });

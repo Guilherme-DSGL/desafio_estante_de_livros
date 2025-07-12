@@ -4,7 +4,7 @@ import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_text_theme.dart';
 
 class AppSubTitleText extends StatelessWidget {
-  const AppSubTitleText({super.key, required this.subTitle, this.textStyle});
+  const AppSubTitleText({required this.subTitle, super.key, this.textStyle});
   final String subTitle;
   final TextStyle? textStyle;
   @override

@@ -6,17 +6,17 @@ import 'package:path_provider/path_provider.dart';
 abstract class FileHelper {
   FileHelper._();
   static String getFileNameFromURL(String url) {
-    Uri uri = Uri.parse(url);
-    String fileName = path.basenameWithoutExtension(uri.path);
+    final Uri uri = Uri.parse(url);
+    final String fileName = path.basenameWithoutExtension(uri.path);
     return fileName;
   }
 
   static Future<String> createPathToDownload(String url) async {
-    Directory? appDocDir = Platform.isAndroid
+    final Directory? appDocDir = Platform.isAndroid
         ? await getExternalStorageDirectory()
         : await getApplicationDocumentsDirectory();
-    String fileName = getFileNameFromURL(url);
-    String path = '${appDocDir!.path}/$fileName.epub';
+    final String fileName = getFileNameFromURL(url);
+    final path = '${appDocDir!.path}/$fileName.epub';
 
     return path;
   }

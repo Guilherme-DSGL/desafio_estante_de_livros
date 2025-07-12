@@ -9,21 +9,20 @@ import '../../controllers/download_book_controller.dart';
 
 class ImageBadge extends StatelessWidget {
   const ImageBadge({
-    super.key,
     required this.onBadgePressed,
     required this.bookEntity,
+    super.key,
   });
 
   final VoidCallback? onBadgePressed;
   final BookEntity bookEntity;
 
   @override
-  Widget build(BuildContext context) {
-    return Badge(
-      offset: const Offset(AppSizes.size20, -AppSizes.size20),
-      largeSize: AppSizes.size70,
-      backgroundColor: AppColors.transparent,
-      label: IconButton(
+  Widget build(BuildContext context) => Badge(
+        offset: const Offset(AppSizes.size20, -AppSizes.size20),
+        largeSize: AppSizes.size70,
+        backgroundColor: AppColors.transparent,
+        label: IconButton(
           iconSize: AppSizes.size40,
           isSelected: bookEntity.isFavorite,
           selectedIcon: const Icon(Icons.bookmark, color: AppColors.red),
@@ -34,16 +33,20 @@ class ImageBadge extends StatelessWidget {
           icon: const Icon(
             Icons.bookmark_border_outlined,
             color: AppColors.labelColor,
-          )),
-      child: InkWell(
+          ),
+        ),
+        child: InkWell(
           onTap: () {
             BlocProvider.of<DownloadBookController>(context)
                 .openBook(bookEntity);
           },
           child: Hero(
-              tag: bookEntity.id,
-              child: AppImage(
-                  height: AppSizes.size200, imageUrl: bookEntity.coverUrl))),
-    );
-  }
+            tag: bookEntity.id,
+            child: AppImage(
+              height: AppSizes.size200,
+              imageUrl: bookEntity.coverUrl,
+            ),
+          ),
+        ),
+      );
 }

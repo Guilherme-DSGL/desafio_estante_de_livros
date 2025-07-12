@@ -4,5 +4,5 @@ abstract interface class IHttpClientAdapter {
       {required String downloadUrl,
       required String pathDirectory,
       void Function()? onComplete,
-      void Function()? onError});
+      void Function()? onError,});
 }

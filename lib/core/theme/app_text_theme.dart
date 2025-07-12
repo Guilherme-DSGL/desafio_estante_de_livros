@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'app_sizes.dart';
 
 abstract class AppTextTheme {
-  static TextTheme primaryTheme = const TextTheme(
+  AppTextTheme._();
+
+  static const primaryTheme = TextTheme(
     displayLarge: TextStyle(
       fontSize: FontSize.fontSize32,
       fontWeight: FontWeight.w700,

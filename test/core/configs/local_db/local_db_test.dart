@@ -16,7 +16,8 @@ void main() {
     });
 
     test('Creates tables  data successfully', () async {
-      final books = await db.query('books', limit: 1);
+      final List<Map<String, Object?>> books =
+          await db.query('books', limit: 1);
       expect(books, isEmpty);
     });
   });
